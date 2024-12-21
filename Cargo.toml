@@ -1,0 +1,18 @@
+[package]
+name = "anti_overwriting"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cfg-if = "1.0"
+anyhow = { version = "1", features = ["backtrace"] }
+tokio = { version = "1", features = ["full"]}
+tracing = "0.1.35"
+tracing-subscriber = { version = "=0.3.16", default-features = false, features = ["smallvec", "fmt", "ansi", "std"] }
+tempfile = "3.13.0"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.59.0", features = ["Win32_Storage_FileSystem"] }
+
+[target.'cfg(not(windows))'.dependencies]
+libc = "0.2.169"
